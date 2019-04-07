@@ -1,0 +1,121 @@
+﻿<html>
+
+<head>
+
+</head>
+
+<body ng-app="mainApp">
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-animate.min.js"></script>
+    <script src="~/Scripts/angular-sanitize.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
+    <script src="~/Scripts/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="~/AngularJs/Modules/Form.Module.js"></script>
+    <script src="~/AngularJs/Factories/Form.Factory.js"></script>
+    <script src="~/AngularJs/Controllers/Form.Controller.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+    <form name="ExampleForm" method="post">
+        <div ng-controller="FormController">
+            Name: <input type="text" ng-model="form.firstName" required><br><br>
+            SurName: <input type="text" ng-model="form.lastName" required><br>
+            <br>
+            <input type="submit" value="Gönder" />
+            FullName {{form.fullName()}}
+        </div>
+    </form>
+
+    <div ng-controller="ListController">
+        <ul>
+            <li ng-repeat="item in json1">{{item.ad}}</li>
+        </ul>
+    </div>
+
+    <div ng-controller="AlertDemoCtrl">
+        <button type="button" class="btn btn-danger" ng-click="addAlert()">Add Alert</button>
+
+
+    </div>
+
+    <div ng-controller="ButtonsCtrl">
+        <h4>Single toggle</h4>
+        <pre>{{singleModel}}</pre>
+        <button type="button" class="btn btn-primary" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">
+            Single Toggle
+        </button>
+        <h4>Checkbox</h4>
+        <pre>Model: {{checkModel}}</pre>
+        <pre>Results: {{checkResults}}</pre>
+        <div class="btn-group">
+            <label class="btn btn-primary" ng-model="checkModel.left" uib-btn-checkbox>Left</label>
+            <label class="btn btn-primary" ng-model="checkModel.middle" uib-btn-checkbox>Middle</label>
+            <label class="btn btn-primary" ng-model="checkModel.right" uib-btn-checkbox>Right</label>
+        </div>
+        <h4>Radio &amp; Uncheckable Radio</h4>
+        <pre>{{radioModel || 'null'}}</pre>
+        <div class="btn-group">
+            <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Left'">Left</label>
+            <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Middle'">Middle</label>
+            <label class="btn btn-primary" ng-model="radioModel" uib-btn-radio="'Right'">Right</label>
+        </div>
+        <div class="btn-group">
+            <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Left'" uncheckable>Left</label>
+            <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Middle'" uncheckable>Middle</label>
+            <label class="btn btn-success" ng-model="radioModel" uib-btn-radio="'Right'" uib-uncheckable="uncheckable">Right</label>
+        </div>
+        <div>
+            <button class="btn btn-default" ng-click="uncheckable = !uncheckable">
+                Toggle uncheckable
+            </button>
+        </div>
+    </div>
+
+    <div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <ul>
+                    <li ng-repeat="item in $ctrl.items">
+                        <a href="#" ng-click="$event.preventDefault(); $ctrl.selected.item = item">{{ item }}</a>
+                    </li>
+                </ul>
+                Selected: <b>{{ $ctrl.selected.item }}</b>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+            </div>
+        </script>
+        <script type="text/ng-template" id="stackedModal.html">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title-{{name}}">The {{name}} modal!</h3>
+            </div>
+            <div class="modal-body" id="modal-body-{{name}}">
+                Having multiple modals open at once is probably bad UX but it's technically possible.
+            </div>
+        </script>
+        <button type="button" class="btn btn-success" ng-click="$ctrl.open()">Open me!</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.open('lg')">Large modal</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.open('sm')">Small modal</button>
+        <button type="button"
+                class="btn btn-default"
+                ng-click="$ctrl.open('sm', '.modal-parent')">
+            Modal appended to a custom parent
+        </button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.toggleAnimation()">Toggle Animation ({{ $ctrl.animationsEnabled }})</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.openComponentModal()">Open a component modal!</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.openMultipleModals()">
+            Open multiple modals at once
+        </button>
+        <div ng-show="$ctrl.selected">Selection from a modal: {{ $ctrl.selected }}</div>
+        <div class="modal-parent">
+        </div>
+    </div>
+</body>
+</html>

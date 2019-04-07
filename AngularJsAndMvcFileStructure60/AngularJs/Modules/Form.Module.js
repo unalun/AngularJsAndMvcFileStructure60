@@ -1,0 +1,1 @@
+﻿var mainApp = angular.module("mainApp", ["ngRoute", "ngAnimate", "ngSanitize", "ui.bootstrap"]);
